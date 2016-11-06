@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Drawing;
 
 namespace MemoryTask
 {
@@ -7,18 +7,30 @@ namespace MemoryTask
     {
         static void Main(string[] args)
         {
-            var timer = new Timer();
-            using (timer.Start())
-            {
-                Thread.Sleep(120);
-            }
-            Console.WriteLine(timer.ElapsedMilliseconds);
+            var bitmap = (Bitmap)Image.FromFile("cat.jpg");
 
-            using (timer.Continue())
+            // Тестирование пользовательского метода SetPixel
+            var timerBitmapEditor = new Timer();
+            using (timerBitmapEditor.Start())
             {
-                Thread.Sleep(1000);
+                using (var bitmapEditor = new BitmapEditor(bitmap))
+                {
+                    for (var i = 0; i < bitmap.Width; i++)
+                        for (var j = 0; j < bitmap.Height; j++)
+                            bitmapEditor.SetPixel(i, j, 255, 255, 255);
+                }
             }
-            Console.WriteLine(timer.ElapsedMilliseconds);
+            Console.WriteLine($"BitmapEditor SetPixel = {timerBitmapEditor.ElapsedMilliseconds} milliseconds");
+
+            // Тестирование стандартного метода SetPixel
+            var timerSetPixel = new Timer();
+            using (timerSetPixel.Start())
+            {
+                for (int i = 0; i < bitmap.Width; i++)
+                    for (int j = 0; j < bitmap.Height; j++)
+                        bitmap.SetPixel(i, j, Color.Azure);
+            }
+            Console.WriteLine($"Standart SetPixel = {timerSetPixel.ElapsedMilliseconds} milliseconds");
 
             Console.ReadLine();
         }
