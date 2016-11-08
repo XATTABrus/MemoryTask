@@ -9,7 +9,6 @@ namespace MemoryTask
     {
         private readonly Bitmap _bitmap;
         private readonly BitmapData _bitmapData;
-        public void Dispose() => _bitmap.UnlockBits(_bitmapData);
 
         public BitmapEditor(Bitmap bitmap)
         {
@@ -25,5 +24,32 @@ namespace MemoryTask
             var color = new[] {blue, green, red};
             Marshal.Copy(color, 0, IntPtr.Add(_bitmapData.Scan0, y * _bitmapData.Stride + x * 3), 3);
         }
+
+        #region IDisposable Support
+        private bool _disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _bitmap.UnlockBits(_bitmapData);
+                }
+                _disposedValue = true;
+            }
+        }
+
+        ~BitmapEditor()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
