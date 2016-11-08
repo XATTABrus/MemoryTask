@@ -6,7 +6,7 @@ namespace MemoryTask
     public class Timer : IDisposable
     {
         private readonly Stopwatch _stopwatch;
-        public IDisposable Continue() => Start();
+        public Timer Continue() => Start();
         public void Dispose() => _stopwatch.Stop();
         public long ElapsedMilliseconds => _stopwatch.ElapsedMilliseconds;
 
@@ -15,7 +15,7 @@ namespace MemoryTask
             _stopwatch = new Stopwatch();
         }
 
-        public IDisposable Start()
+        public Timer Start()
         {
             _stopwatch.Start();
             return this;
