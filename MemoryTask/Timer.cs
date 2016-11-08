@@ -3,32 +3,19 @@ using System.Diagnostics;
 
 namespace MemoryTask
 {
-    public class Timer : IDisposable
+    public class Timer : Stopwatch, IDisposable
     {
-        private readonly Stopwatch _stopwatch;
-        public Timer Continue() => Start();
-        public void Dispose() => _stopwatch.Stop();
-        public long ElapsedMilliseconds => _stopwatch.ElapsedMilliseconds;
-        public long ElapsedTicks => _stopwatch.ElapsedTicks;
-        public TimeSpan Elapsed => _stopwatch.Elapsed;
-        public bool IsRunning => _stopwatch.IsRunning;
-        public void Reset() => _stopwatch.Reset();
-        public bool IsBetterThanStopWatch => true;
-        
-        public Timer()
-        {
-            _stopwatch = new Stopwatch();
-        }
+        public void Dispose() => Stop();
 
-        public Timer Start()
+        public new Timer Start()
         {
-            _stopwatch.Start();
+            base.Start();
             return this;
         }
 
-        public Timer Restart()
+        public new Timer Restart()
         {
-            _stopwatch.Restart();
+            base.Restart();
             return this;
         }
     }
