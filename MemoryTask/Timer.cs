@@ -12,13 +12,13 @@ namespace MemoryTask
 
         public Timer StartTimer()
         {
-            base.Start();
+            Start();
             return this;
         }
 
         public Timer RestartTimer()
         {
-            base.Restart();
+            Restart();
             return this;
         }
     }
