@@ -11,7 +11,7 @@ namespace MemoryTask
 
             // Тестирование пользовательского метода SetPixel
             var timerBitmapEditor = new Timer();
-            using (timerBitmapEditor.Start())
+            using (timerBitmapEditor.StartTimer())
             {
                 using (var bitmapEditor = new BitmapEditor(bitmap))
                 {
@@ -24,7 +24,7 @@ namespace MemoryTask
 
             // Тестирование стандартного метода SetPixel
             var timerSetPixel = new Timer();
-            using (timerSetPixel.Start())
+            using (timerSetPixel.StartTimer())
             {
                 for (int i = 0; i < bitmap.Width; i++)
                     for (int j = 0; j < bitmap.Height; j++)

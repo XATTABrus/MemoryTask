@@ -5,15 +5,18 @@ namespace MemoryTask
 {
     public class Timer : Stopwatch, IDisposable
     {
-        public void Dispose() => Stop();
+        public void Dispose()
+        {
+            Stop();
+        }
 
-        public new Timer Start()
+        public Timer StartTimer()
         {
             base.Start();
             return this;
         }
 
-        public new Timer Restart()
+        public Timer RestartTimer()
         {
             base.Restart();
             return this;
